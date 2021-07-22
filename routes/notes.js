@@ -18,7 +18,7 @@ notes.post('/', (req, res) => {
     const newNote = {
         title,
         text,
-        noteID: uniqid()
+        id: uniqid()
     };
 
     appendToFile(newNote, './db/db.json');
