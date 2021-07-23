@@ -1,17 +1,7 @@
 [
     {
-        "title": "Test Title",
-        "text": "Test text",
-        "id": "1990"
-    },
-    {
-        "title": "Hello?",
-        "text": "Did you work?",
-        "id": "3yo3qad1ts0krem1m7h"
-    },
-    {
-        "title": "How about another one?",
-        "text": "This is going to be a long example.",
-        "id": "3yo3qad27uwkrenck2f"
+        "title": "Finish Project",
+        "text": "You should deploy this to Heroku.",
+        "id": "3yo3qad2mpskrfzz4y3"
     }
 ]

@@ -2,11 +2,14 @@ const notes = require('express').Router();
 const uniqid = require('uniqid');
 const { 
     readFromFile,
+    writeToFile,
     appendToFile 
 } = require('../utility/fsUtils');
 
+const dbFilePath = './db/db.json';
+
 notes.get('/', (req, res) => {
-    readFromFile('./db/db.json')
+    readFromFile(dbFilePath)
         .then((data) => res.send(JSON.parse(data)));
 });
 
@@ -21,9 +24,26 @@ notes.post('/', (req, res) => {
         id: uniqid()
     };
 
-    appendToFile(newNote, './db/db.json');
+    appendToFile(newNote, dbFilePath);
 
     res.json('Note added successfully');
 });
+
+notes.delete('/:id', (req, res) => {
+    const noteId = req.params.id;
+
+    readFromFile(dbFilePath)
+        .then((data) => JSON.parse(data))
+        .then((json) => {
+            const noteRemoved = json.filter(note => note.id !== noteId);
+
+            const dataJSON = JSON.stringify(noteRemoved, null, 4);
+
+            writeToFile( dbFilePath, dataJSON );
+
+            res.json('Note deleted successfully');
+        });
+
+})
 
 module.exports = notes;
