@@ -1,7 +1,12 @@
 [
     {
-        "title": "Finish Project",
-        "text": "You should deploy this to Heroku.",
-        "id": "3yo3qad2mpskrfzz4y3"
+        "title": "Testing Title",
+        "text": "Testing text content.",
+        "id": "3yo3qad2pakkrg24jh4"
+    },
+    {
+        "title": "Example of a note",
+        "text": "Description of the details that go with this note.",
+        "id": "3yo3qad2pakkrg25a5f"
     }
 ]
