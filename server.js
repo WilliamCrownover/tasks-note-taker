@@ -4,7 +4,7 @@ const path = require( 'path' );
 const api = require( './routes/index.js' );
 
 // Open port on Heroku or default to 3001;
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 // Load Express.js to app
 const app = express();
