@@ -8,5 +8,10 @@
         "title": "Example of a note",
         "text": "Description of the details that go with this note.",
         "id": "3yo3qad2pakkrg25a5f"
+    },
+    {
+        "title": "Another One",
+        "text": "Testing the text",
+        "id": "3yo3qad171gkrirqacm"
     }
 ]

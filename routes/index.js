@@ -1,14 +1,13 @@
-// I decided to use 'index.js' in the directory '/routes' so that I can easily route future api endpoints to other sub modules.
+// I decided to use 'index.js' in the directory '/routes' so that I can easily route future endpoints to other sub modules.
 
 // Required modules
-const express = require( 'express' );
+const router = require( 'express' ).Router();
 const notesRouter = require( './notes' );
-
-// Load Express.js to app
-const app = express();
+const pagesRouter = require( './pages' );
 
 // Route /api/notes requests to notes.js
-app.use( '/notes', notesRouter );
+router.use( '/api/notes', notesRouter );
+router.use( '/', pagesRouter );
 
 // Module export
-module.exports = app;
+module.exports = router;

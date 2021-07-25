@@ -1,5 +1,5 @@
 // Required modules
-const notes = require( 'express' ).Router();
+const router = require( 'express' ).Router();
 const uniqid = require( 'uniqid' );
 const { 
     readFromFile,
@@ -11,13 +11,18 @@ const {
 const dbFilePath = './db/db.json';
 
 // Get sends back JSON parsed file
-notes.get( '/', ( req, res ) => {
+router.get( '/', ( req, res ) => {
     readFromFile( dbFilePath )
-        .then(( data ) => res.send( JSON.parse( data )));
+        .then(( data ) => {
+            const parsedData = JSON.parse( data );
+
+            res.status( 200 ).json( parsedData );
+        })
+        .catch(( error ) => res.status( 500 ).json( error ));
 });
 
 // Post appends a new note to database file
-notes.post( '/' , ( req, res ) => {
+router.post( '/' , ( req, res ) => {
     console.log( 'New Note Contents', req.body );
 
     // Deconstruct incomming note object
@@ -32,11 +37,11 @@ notes.post( '/' , ( req, res ) => {
     appendToFile( newNote, dbFilePath );
 
     console.log( 'Note added successfully' );
-    res.json( 'Note added successfully' );
+    res.status( 200 ).json( 'Note added successfully' );
 });
 
 // Delete removes a note using its id parameter from the database file
-notes.delete( '/:id', ( req, res ) => {
+router.delete( '/:id', ( req, res ) => {
     const noteId = req.params.id;
 
     readFromFile( dbFilePath )
@@ -48,9 +53,10 @@ notes.delete( '/:id', ( req, res ) => {
             writeToFile( dbFilePath, dataJSON );
 
             console.log( 'Note deleted successfully' );
-            res.json( 'Note deleted successfully' );
-        });
+            res.status( 200 ).json( 'Note deleted successfully' );
+        })
+        .catch(( error ) => res.status( 500 ).json( error ));
 })
 
 // Module export
-module.exports = notes;
+module.exports = router;
