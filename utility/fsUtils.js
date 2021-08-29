@@ -8,24 +8,28 @@ const util = require( 'util' );
 const readFromFile = util.promisify( fs.readFile );
 
 // Creates a new file to provided path with provided content
-const writeToFile = ( filePath, content ) => 
-    fs.writeFile( filePath, content, ( err ) => 
-        err ? console.log( err ) : console.log( `File written to path: ${filePath}` )
-    );
+const writeToFile = ( filePath, content ) =>
+	fs.writeFile( filePath, content, ( err ) =>
+		err ? console.log( err ) : console.log( `File written to path: ${filePath}` )
+	);
 
 // Appends an object to a file converting it through JSON
 const appendToFile = ( obj, filePath ) => {
-    readFromFile( filePath )
-        .then(( data ) => {
-            const parsedData = JSON.parse( data );
+	readFromFile( filePath )
+		.then( ( data ) => {
+			const parsedData = JSON.parse( data );
 
-            parsedData.push( obj );
+			parsedData.push( obj );
 
-            const dataJSON = JSON.stringify( parsedData, null, 4 );
+			const dataJSON = JSON.stringify( parsedData, null, 4 );
 
-            writeToFile( filePath, dataJSON );
-        });
-}
+			writeToFile( filePath, dataJSON );
+		} );
+};
 
 // Export module functions
-module.exports = { readFromFile, writeToFile, appendToFile };
+module.exports = {
+	readFromFile,
+	writeToFile,
+	appendToFile
+};
